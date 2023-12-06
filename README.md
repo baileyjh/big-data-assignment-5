@@ -1,4 +1,4 @@
-# big-data-assignment-5
+# Assignment 5: Information Retrieval from Real Data
 
 **Code**
 
