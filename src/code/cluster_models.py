@@ -9,7 +9,6 @@ class Data:
     def __init__(self, file):
         with open(file, 'r', encoding='utf-8') as json_file:
             self._data: dict = json.load(json_file)
-            print(self._data)
         self._parsed_data, self._vectorizer = self.vectorize(self.extract(self._data))
 
     @property
@@ -23,11 +22,12 @@ class Data:
     def extract(data_dict: dict) -> list:
         vid_list = []
         for item in data_dict:
-            if item["details"]["name"] == "From Google Ads":
+            if "details" in item.keys():
                 vid_list.append("Ad")
             else:
-                string = item["title"] + '' + item["subtitles"]["name"]
-                vid_list.append(string)
+                if "subtitles" in item.keys():
+                    string = item["title"] + '' + item["subtitles"][0]["name"]
+                    vid_list.append(string)
         return vid_list
 
     @staticmethod
