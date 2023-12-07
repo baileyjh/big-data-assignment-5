@@ -1,6 +1,5 @@
 
 import json
-import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.cluster import KMeans
 
@@ -9,12 +8,13 @@ class Data:
     def __init__(self, file):
         with open(file, 'r', encoding='utf-8') as json_file:
             self._data: dict = json.load(json_file)
-        self._parsed_data, self._vectorizer = self.vectorize(self.extract(self._data))
+        self._vectorized_data, self._vectorizer = self.vectorize(self.extract(self._data))
 
     @property
-    def parsed_data(self):
-        return self._parsed_data
+    def vectorized_data(self):
+        return self._vectorized_data
 
+    @property
     def vectorizer(self):
         return self._vectorizer
 
@@ -39,8 +39,9 @@ class Data:
 
 class Cluster:
 
-    def __init__(self, cluster_centers, num_clusters):
+    def __init__(self, cluster_centers, cluster_labels, num_clusters):
         self._cluster_centers = cluster_centers
+        self.cluster_labels = cluster_labels
         self.num_clusters = num_clusters
 
     @classmethod
@@ -48,14 +49,15 @@ class Cluster:
         model = KMeans(n_clusters=num_clusters, n_init=5, max_iter=500, random_state=42)
         model.fit(vector_data)
         cluster_centers = model.cluster_centers_
-        return Cluster(cluster_centers, num_clusters)
+        cluster_labels = model.labels_
+        return Cluster(cluster_centers, cluster_labels, num_clusters)
 
-    def print_top_terms_per_cluster(self, vectorizer, words=5):
-        print("Top terms per cluster:")
+    def print(self, vectorizer, words=3):
         order_centroids = self._cluster_centers.argsort()[:, ::-1]
-        terms = vectorizer.get_feature_names()
+        terms = vectorizer.get_feature_names_out()
         for i in range(self.num_clusters):
-            print("Cluster %d:" % i, end=" ")
+            cluster_size = sum(self.cluster_labels == i)
+            print(f"Cluster {i} (Videos: {cluster_size}):", end=" ")
             for ind in order_centroids[i, :words]:
                 print(' %s' % terms[ind], end=" ")
-            print()
+            print('')
