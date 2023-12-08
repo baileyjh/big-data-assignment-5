@@ -6,7 +6,6 @@ from src.code.cluster_models import Data, Cluster
 
 __author__ = "Bailey Hall"
 __copyright__ = "Copyright 2023, Westmont College, Bailey Hall"
-__credits__ = ["Bailey Hall"]
 __license__ = "MIT"
 __email__ = "bahall@westmont.edu"
 
