@@ -39,7 +39,7 @@ class Data:
         return self._vectorizer
 
     @staticmethod
-    def extract(data_dict: dict) -> list:
+    def extract(data_dict) -> list:
         vid_list = []
         for item in data_dict:
             # Only Google Ads have a "details" key
@@ -47,7 +47,7 @@ class Data:
                 vid_list.append("Ad")
             else:
                 if "subtitles" in item.keys():
-                    string = item["title"] + '' + item["subtitles"][0]["name"]
+                    string = item["title"] + ' ' + item["subtitles"][0]["name"]
                     vid_list.append(string)
         return vid_list
 
