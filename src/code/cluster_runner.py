@@ -13,8 +13,8 @@ __email__ = "bahall@westmont.edu"
 def main() -> None:
     file_path = '/Users/baileyhall/Desktop/BigData/assignment-5-IR/youtube-watch-history.json'
     data = Data(file_path)
-    cluster = Cluster.k_means(data.vectorized_data, num_clusters=10)
-    cluster.print(data.vectorizer, words=2)
+    cluster = Cluster.k_means(data.vectorized_data, 10)
+    cluster.print(data.vectorizer, 2)
 
 
 main()
