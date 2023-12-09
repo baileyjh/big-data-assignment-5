@@ -11,10 +11,15 @@ __email__ = "bahall@westmont.edu"
 
 
 def main() -> None:
+    # Variables to change based on the user
     file_path = '/Users/baileyhall/Desktop/BigData/assignment-5-IR/youtube-watch-history.json'
+    cluster_number = 10
+    top_terms = 2
+
+    # Code that executes the program
     data = Data(file_path)
-    cluster = Cluster.k_means(data.vectorized_data, 10)
-    cluster.print(data.vectorizer, 2)
+    cluster = Cluster.k_means(data.vectorized_data, cluster_number)
+    cluster.print(data.vectorizer, top_terms)
 
 
 main()

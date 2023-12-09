@@ -1,4 +1,4 @@
-"""Unit tests for functions in `src.code.cluster_models`.
+"""Unit tests for functions with logic written by me only in `src.code.cluster_models`.
 """
 
 import unittest
