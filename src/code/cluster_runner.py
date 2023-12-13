@@ -13,8 +13,8 @@ __email__ = "bahall@westmont.edu"
 def main() -> None:
     # Variables to change based on the user
     file_path = '/Users/baileyhall/Desktop/BigData/assignment-5-IR/youtube-watch-history.json'
-    cluster_number = 10
-    top_terms = 2
+    cluster_number = 15
+    top_terms = 3
 
     # Code that executes the program
     data = Data(file_path)
